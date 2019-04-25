@@ -1,15 +1,10 @@
 """Draws squares around detected faces in the given image."""
-
 import argparse
-
 # [START vision_face_detection_tutorial_imports]
 from google.cloud import vision
 from google.cloud.vision import types
 from PIL import Image, ImageDraw
-
 # [END vision_face_detection_tutorial_imports]
-
-
 # [START vision_face_detection_tutorial_send_request]
 def detect_face(face_file, max_results=4):
     """Uses the Vision API to detect faces in the given file.
@@ -21,15 +16,13 @@ def detect_face(face_file, max_results=4):
     # [START vision_face_detection_tutorial_client]
     client = vision.ImageAnnotatorClient()
     # [END vision_face_detection_tutorial_client]
-
     content = face_file.read()
     image = types.Image(content=content)
-
     return client.face_detection(image=image, max_results=max_results).face_annotations
 # [END vision_face_detection_tutorial_send_request]
-
-
 # [START vision_face_detection_tutorial_process_response]
+
+
 def highlight_faces(image, faces, output_filename):
     """Draws a polygon around the faces, then saves to output_filename.
     Args:
@@ -63,14 +56,14 @@ def highlight_faces(image, faces, output_filename):
 def main(input_filename, output_filename, max_results):
     with open(input_filename, 'rb') as image:
         faces = detect_face(image, max_results)
-        print('Found {} face{}'.format(
-            len(faces), '' if len(faces) == 1 else 's'))
+        #print('Found {} face{}'.format(
+        #    len(faces), '' if len(faces) == 1 else 's'))
 
-        print('Writing to file {}'.format(output_filename))
+        #print('Writing to file {}'.format(output_filename))
         # Reset the file pointer, so we can read the file again
         image.seek(0)
         box = highlight_faces(image, faces, output_filename)
-        box.save('output_box.txt')
+        print(box)
 # [END vision_face_detection_tutorial_run_application]
 
 
