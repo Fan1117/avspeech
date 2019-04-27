@@ -1,3 +1,4 @@
+#!/usr/bin/python3.7
 # -*- coding: utf-8 -*-
 """
 Created on Fri Apr 26 11:59:47 2019
@@ -33,5 +34,5 @@ def build_dict(infile_path, outfile_path):
                         row = [path, int(count), video, time]
                         writer.writerow({'address': path,'count': count, 'video_name': video,'time':time})
                         
-build_dict(infile_path, outfile_path)
+build_dict(mp4_fold_path, csv_out_path)
     
