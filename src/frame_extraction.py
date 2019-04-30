@@ -22,8 +22,6 @@ def frame_extraction(videos_folder, frames_folder, video_num):
     f = f[:video_num-1]
     
     for i in range(len(f)):
-        print("{0}/{1}".format(i, len(f)))
-        print(f[i])
         video_file = f[i]
         video_name = video_file[:-4]
         frame_folder = frames_folder + '/' + video_name
@@ -36,6 +34,7 @@ def frame_extraction(videos_folder, frames_folder, video_num):
         video_path = videos_folder + '/' + video_file
         cap = cv2.VideoCapture(video_path)
         fps = cap.get(cv2.CAP_PROP_FPS)
+        print("{0}/{1}".format(i, len(f)), f[i], fps)
         fps_target = 25
         currentFrame = 0
         targetFrame = 0
