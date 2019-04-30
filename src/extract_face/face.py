@@ -92,8 +92,10 @@ for (dirpath, dirnames, filenames) in os.walk(frame_folder):
     paths.extend(dirnames)
     break
 
-
+count = 0
 for path in paths:
+    print("{0}/{1}".format(count, len(paths)))
+    count += 1
     try:
         os.makedirs('../../../download/separated_data/faces/'+path)
     except FileExistsError:
