@@ -46,6 +46,8 @@ for path in paths:
       line = line.replace(' ','')
       boxes.append(line)
  boxes.pop()
+ if len(boxes) < 75:
+     continue
  for i in range(75):
     boxes[i] = boxes[i].split(',')
     #print(boxes[i])
