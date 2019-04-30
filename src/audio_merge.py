@@ -9,7 +9,7 @@ import os
 import soundfile as sf
 
 
-audio_path = '../../download/separated_data/audio'
+audio_path = '../../new_download/separated_data/audio'
 mix_path = '../../new_download/mixture_data/audio'
 SR = 16000
 audio_num = 50

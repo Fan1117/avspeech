@@ -93,7 +93,7 @@ def invert_magnitude_phase(magnitude, phase_angle):
     return magnitude * phase
 #########################################################################
 SR = 16000
-separated_path = '../../download/separated_data/audio'
+separated_path = '../../new_download/separated_data/audio'
 mix_path = '../../new_download/mixture_data/audio'
 h5py_path = '../../new_dataset/no_video'
 
