@@ -31,7 +31,7 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
         path2_count = i + 1
         if path2_count == len(f):
             break
-        while f[path2_count][:11] not in path1:
+        while filenames[path2_count][:11] not in path1:
             path2 = f[path2_count]
             name2 = path2[:-12]
             path2 = name2 + '.wav'
