@@ -98,12 +98,11 @@ for path in paths:
         os.makedirs('../../../download/separated_data/faces/'+path)
     except FileExistsError:
         pass
-
-   input_image = []
-   output = []
-   for i in range(75):
-      input_image.append('../../../download/separated_data/frame/'+path+'/'+str(i)+'.jpg')
-      output.append('../../../download/separated_data/faces/'+path+'/out'+str(i)+'.jpg')
-   max_results = 1
-   main(input_image,output,max_results, path)
+    input_image = []
+    output = []
+    for i in range(75):
+       input_image.append('../../../download/separated_data/frame/'+path+'/'+str(i)+'.jpg')
+       output.append('../../../download/separated_data/faces/'+path+'/out'+str(i)+'.jpg')
+    max_results = 1
+    main(input_image,output,max_results, path)
 
