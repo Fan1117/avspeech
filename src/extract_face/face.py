@@ -68,12 +68,12 @@ def main(input_filename, output_filename, max_results,path):
         with open(input_filename[i], 'rb') as image:
             faces = detect_face(image, max_results)
             print('Found {} face{}'.format(len(faces), '' if len(faces) == 1 else 's'))
-        if len(faces) > 1:
-            continue
-        print('Writing to file {}'.format(output_filename[i]))
-        # Reset the file pointer, so we can read the file again
-        image.seek(0)
-        box = highlight_faces(image, faces, output_filename[i])
+            if len(faces) > 1:
+                continue
+            print('Writing to file {}'.format(output_filename[i]))
+            # Reset the file pointer, so we can read the file again
+            image.seek(0)
+            box = highlight_faces(image, faces, output_filename[i])
         with open("../../../download/separated_data/faces/"+path+"/box.txt","a") as f:#append mode
            f.write(str(box)+'\n') 
 # [END vision_face_detection_tutorial_run_application]
