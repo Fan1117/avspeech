@@ -160,18 +160,18 @@ def spec_extraction(mix_path, separated_path, h5py_path, sample_num):
                 val_dataset.create_dataset('spec_mix', shape=(500, 301, 150), dtype=np.float32)
                 val_dataset.create_dataset('spec_1', shape=(500, 301, 150), dtype=np.float32)
                 val_dataset.create_dataset('spec_2', shape=(500, 301, 150), dtype=np.float32)
-            val_dataset['spec_mix'][i-2000] = mel_mix
-            val_dataset['spec_1'][i-2000] = mel_1
-            val_dataset['spec_2'][i-2000] = mel_2      
+            val_dataset['spec_mix'][i-200] = mel_mix
+            val_dataset['spec_1'][i-200] = mel_1
+            val_dataset['spec_2'][i-200] = mel_2      
             
         elif i < 300:
             if i == 250:
                 test_dataset.create_dataset('spec_mix', shape=(500, 301, 150), dtype=np.float32)
                 test_dataset.create_dataset('spec_1', shape=(500, 301, 150), dtype=np.float32)
                 test_dataset.create_dataset('spec_2', shape=(500, 301, 150), dtype=np.float32)
-            test_dataset['spec_mix'][i-2500] = mel_mix
-            test_dataset['spec_1'][i-2500] = mel_1
-            test_dataset['spec_2'][i-2500] = mel_2
+            test_dataset['spec_mix'][i-250] = mel_mix
+            test_dataset['spec_1'][i-250] = mel_1
+            test_dataset['spec_2'][i-250] = mel_2
             
         else:
             break
