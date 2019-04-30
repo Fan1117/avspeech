@@ -7,7 +7,7 @@ Created on Sun Apr 28 11:00:25 2019
 
 import cv2
 import os
-videos_folder = '../../download/separated_data/video'
+videos_folder = '../../new_download/separated_data/video'
 frames_folder = '../../new_download/separated_data/frame'
 #video_name = 'akwvpAiLFk0_144.680000-150.000000'
 #video_name = 'AvWWVOgaMlk_090.000000-093.566667'
