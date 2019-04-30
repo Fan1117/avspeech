@@ -11,11 +11,12 @@ import soundfile as sf
 
 audio_path = '../../new_download/separated_data/audio'
 mix_path = '../../new_download/mixture_data/audio'
+nparray_path = '../../new_download/separated_data/nparray'
 SR = 16000
 audio_num = 50
-def audio_merge(audio_path, mix_path, audio_num):
+def audio_merge(nparray_path, audio_path, mix_path, audio_num):
     f = []
-    for (dirpath, dirnames, filenames) in os.walk(audio_path):
+    for (dirpath, dirnames, filenames) in os.walk(nparray_path):
         f.extend(filenames)
         break
     
@@ -24,13 +25,16 @@ def audio_merge(audio_path, mix_path, audio_num):
 
     for i in range(len(f)):
         path1 = f[i]
-        name1 = path1[:-4]
+        name1 = path1[:-12]
+        path1 = name1 + '.wav'
+        
         path2_count = i + 1
         if path2_count == len(f):
             break
         while filenames[path2_count][:10] not in path1:
             path2 = f[path2_count]
-            name2 = path2[:-4]
+            name2 = path2[:-12]
+            path2 = name2 + '.wav'
             
             ### load
             signal1, _ = librosa.load(audio_path + '/' + path1, sr=SR)
@@ -64,5 +68,5 @@ def audio_merge(audio_path, mix_path, audio_num):
             if path2_count == len(f):
                 break
 
-audio_merge(audio_path, mix_path, audio_num)       
+audio_merge(nparray_path, audio_path, mix_path, audio_num)       
 
