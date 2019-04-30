@@ -25,6 +25,7 @@ for (dirpath, dirnames, filenames) in os.walk(faces_folder):
 count = 0
 for path in paths:
  print("{0}/{1}".format(count, len(paths)))
+ count += 1
  filepath = '../../../new_download/separated_data/faces/'+path+'/box.txt'
  with open(filepath) as fp:  
    line = fp.readline()

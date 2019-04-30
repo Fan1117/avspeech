@@ -1,14 +1,24 @@
 import cv2
-from PIL import Image
-import glob, os
+import os
 
-paths = ['ymD5uLlLc0g_036.033000-040.900000','Swss72CHSWg_090.023267-097.297200',
-        'Swss72CHSWg_090.023267-097.297200','AvWWVOgaMlk_090.000000-093.566667',
-         'akwvpAiLFk0_144.680000-150.000000']
+#paths = ['019QoF6jwBU_150.633000-154.466000','6CUNIOtQ9L4_139.360000-144.440000',
+#         'sl08afxcx4_115.515400-119.986533','bLEddi92aFI_171.480000-177.400000'] 
 
+
+faces1_folder = '../../../new_download/separated_data/faces1'
+
+paths = []
+for (dirpath, dirnames, filenames) in os.walk(faces1_folder):
+    paths.extend(dirnames)
+    break
+
+
+count = 0
 for path in paths:  
+  print("{0}/{1}".format(count, len(paths)))
+  count += 1
   for i in range(75):
-   im = cv2.imread('../../../download/separated_data/faces1/'+path+'/cropped'+str(i)+'.jpg', cv2.IMREAD_UNCHANGED)
+   im = cv2.imread('../../../new_download/separated_data/faces1/'+path+'/cropped'+str(i)+'.jpg', cv2.IMREAD_UNCHANGED)
    print(im.shape)
    size = (int(64), int(64))
 
@@ -18,7 +28,14 @@ for path in paths:
       #im.thumbnail(size)
    resized = cv2.resize(im, size, interpolation = cv2.INTER_AREA)
    #gray = cv2.cvtColor(resized,cv2.COLOR_BGR2GRAY)
-   cv2.imwrite( '../../../download/separated_data/faces2/'+path+'/face'+str(i)+'.jpg', resized);
+   try:
+       os.makedirs('../../../new_download/separated_data/faces2/'+path)
+   except FileExistsError:
+       pass
+   
+   
+   
+   cv2.imwrite( '../../../new_download/separated_data/faces2/'+path+'/face'+str(i)+'.jpg', resized);
   # waitKey(0);
    # resized.save(file +".thumbnail", "JPEG")
    print('Resized Dimensions : ',resized.shape)
