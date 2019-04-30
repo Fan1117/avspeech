@@ -23,6 +23,7 @@ def frame_extraction(videos_folder, frames_folder, video_num):
     
     for i in range(len(f)):
         print("{0}/{1}".format(i, len(f)))
+        print(f[i])
         video_file = f[i]
         video_name = video_file[:-4]
         frame_folder = frames_folder + '/' + video_name
