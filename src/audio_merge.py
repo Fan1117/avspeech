@@ -31,7 +31,7 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
         path2_count = i + 1
         if path2_count == len(f):
             break
-        while filenames[path2_count][:11] not in path1:
+        while f[path2_count][:11] not in path1:
             path2 = f[path2_count]
             name2 = path2[:-12]
             path2 = name2 + '.wav'
@@ -63,8 +63,8 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
 #             signal1_mel = librosa.feature.melspectrogram(y=signal1, sr=SR, n_mels=N_MEL)
 #             signal2_mel = librosa.feature.melspectrogram(y=signal2, sr=SR, n_mels=N_MEL)
 #             ### save h5py
-            path2_count += 1
-            if path2_count == len(f):
+    
+            if path2_count == len(f)-1:
                 break
 
 audio_merge(nparray_path, audio_path, mix_path, audio_num)       
