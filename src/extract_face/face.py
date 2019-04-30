@@ -71,6 +71,11 @@ def main(input_filename, output_filename, max_results,path):
                 continue
             if len(faces) > 1:
                 continue
+            
+            try:
+                os.makedirs('../../../new_download/separated_data/faces/'+path)
+            except FileExistsError:
+                pass
             #print('Writing to file {}'.format(output_filename[i]))
             # Reset the file pointer, so we can read the file again
             image.seek(0)
@@ -98,10 +103,7 @@ count = 0
 for path in paths:
     print("{0}/{1}".format(count, len(paths)))
     count += 1
-    try:
-        os.makedirs('../../../new_download/separated_data/faces/'+path)
-    except FileExistsError:
-        pass
+
     input_image = []
     output = []
     for i in range(75):
