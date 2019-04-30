@@ -36,7 +36,7 @@ def frame_extraction(videos_folder, frames_folder, video_num):
         fps = cap.get(cv2.CAP_PROP_FPS)
         print("{0}/{1}".format(i, len(f)), f[i], fps)
         if fps < 25:
-            break
+            continue
         fps_target = 25
         currentFrame = 0
         targetFrame = 0
