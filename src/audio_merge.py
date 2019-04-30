@@ -63,9 +63,9 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
 #             signal1_mel = librosa.feature.melspectrogram(y=signal1, sr=SR, n_mels=N_MEL)
 #             signal2_mel = librosa.feature.melspectrogram(y=signal2, sr=SR, n_mels=N_MEL)
 #             ### save h5py
-    
             if path2_count == len(f)-1:
                 break
+            path2_count += 1
 
 audio_merge(nparray_path, audio_path, mix_path, audio_num)       
 
