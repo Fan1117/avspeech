@@ -139,16 +139,17 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
     test_dataset = h5py.File(test_name, 'a')
     #############################################
     for i in range(len(f)):
-        print("{0}/{1}".format(i, len(f)))
+        
         file_mix = f[i]
         file_1, file_2 = file_mix.split('~')
         file_2 = file_1[:-4]
-        nparray_1 = file_1 + '.npy'
-        nparray_2 = file_2 + '.npy'
+        nparray_1 = file_1 + '_facenet' + '.npy'
+        nparray_2 = file_2 + '_facenet' + '.npy'
         if nparray_1 not in faces_list:
             continue
         if nparray_2 not in faces_list:
             continue
+        print("{0}/{1}".format(i, len(f)))
         ### audio path
         path_mix = mix_path + '/' + file_mix
         path_1 = separated_path + '/' + file_1 + '.wav'
