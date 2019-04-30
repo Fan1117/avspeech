@@ -59,5 +59,5 @@ for path in paths:
         os.makedirs('../../../new_download/separated_data/faces1/'+path)
     except FileExistsError:
         pass
-    crop(image, (int(boxes[i][0]),int(boxes[i][1]), int(boxes[i][2]), int(boxes[i][5])), '../../../download/separated_data/faces1/'+path+'/cropped'+str(i)+'.jpg')
+    crop(image, (int(boxes[i][0]),int(boxes[i][1]), int(boxes[i][2]), int(boxes[i][5])), '../../../new_download/separated_data/faces1/'+path+'/cropped'+str(i)+'.jpg')
 
