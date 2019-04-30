@@ -98,14 +98,14 @@ mix_path = '../../download/mixture_data/audio'
 h5py_path = '../../dataset/no_video'
 
 
-def spec_extraction(mix_path, separated_path, h5py_path):
+def spec_extraction(mix_path, separated_path, h5py_path, sample_num):
     f = []
     converter = MelConverter()
     for (dirpath, dirnames, filenames) in os.walk(mix_path):
         f.extend(filenames)
         break
 
-    
+    f = f[:sample_num]
 
     
     try:
@@ -126,6 +126,7 @@ def spec_extraction(mix_path, separated_path, h5py_path):
     
     
     for i in range(len(f)):
+        print("{0}/{1}".format(i, len(f)))
         file_mix = f[i]
         file_1, file_2 = file_mix.split('~')
         
@@ -182,7 +183,7 @@ def spec_extraction(mix_path, separated_path, h5py_path):
             
 
 
-spec_extraction(mix_path, separated_path, h5py_path)         
+spec_extraction(mix_path, separated_path, h5py_path, 3000)         
             
             
         
