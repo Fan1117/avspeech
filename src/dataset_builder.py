@@ -142,7 +142,7 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
         
         file_mix = f[i]
         file_1, file_2 = file_mix.split('~')
-        file_2 = file_1[:-4]
+        file_2 = file_2[:-4]
         nparray_1 = file_1 + '_facenet' + '.npy'
         nparray_2 = file_2 + '_facenet' + '.npy'
         print(nparray_1, nparray_2, faces_list)
