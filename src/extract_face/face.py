@@ -74,10 +74,18 @@ def main(input_filename, output_filename, max_results,path):
         with open("../../../download/separated_data/faces/"+path+"/box.txt","a") as f:#append mode
            f.write(str(box)+'\n') 
 # [END vision_face_detection_tutorial_run_application]
+          
 
-paths = ['ymD5uLlLc0g_036.033000-040.900000','Swss72CHSWg_090.023267-097.297200',
-        'Swss72CHSWg_090.023267-097.297200','AvWWVOgaMlk_090.000000-093.566667',
-         'akwvpAiLFk0_144.680000-150.000000']
+#paths = ['ymD5uLlLc0g_036.033000-040.900000','Swss72CHSWg_090.023267-097.297200',
+#        'Swss72CHSWg_090.023267-097.297200','AvWWVOgaMlk_090.000000-093.566667',
+#         'akwvpAiLFk0_144.680000-150.000000']
+import os
+frame_folder = '../../../download/separated_data/frame'
+
+paths = []
+for (dirpath, dirnames, filenames) in os.walk(frame_folder):
+    paths.extend(dirnames)
+    break
 
 for path in paths:
     if __name__ == '__main__':
