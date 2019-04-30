@@ -1,6 +1,5 @@
 """Draws squares around detected faces in the given image."""
 
-import argparse
 
 # [START vision_face_detection_tutorial_imports]
 from google.cloud import vision
@@ -19,7 +18,7 @@ def detect_face(face_file, max_results=1):
         An array of Face objects with information about the picture.
     """
     # [START vision_face_detection_tutorial_client]
-    client = vision.ImageAnnotatorClient()
+    #client = vision.ImageAnnotatorClient()
     # [END vision_face_detection_tutorial_client]
 
     content = face_file.read()
@@ -67,10 +66,10 @@ def main(input_filename, output_filename, max_results,path):
     for i in range(len(input_filename)):
         with open(input_filename[i], 'rb') as image:
             faces = detect_face(image, max_results)
-            print('Found {} face{}'.format(len(faces), '' if len(faces) == 1 else 's'))
+            #print('Found {} face{}'.format(len(faces), '' if len(faces) == 1 else 's'))
             if len(faces) > 1:
                 continue
-            print('Writing to file {}'.format(output_filename[i]))
+            #print('Writing to file {}'.format(output_filename[i]))
             # Reset the file pointer, so we can read the file again
             image.seek(0)
             box = highlight_faces(image, faces, output_filename[i])
@@ -83,6 +82,9 @@ def main(input_filename, output_filename, max_results,path):
 
 
 import os
+
+client = vision.ImageAnnotatorClient()
+
 frame_folder = '../../../download/separated_data/frame'
 
 paths = []
