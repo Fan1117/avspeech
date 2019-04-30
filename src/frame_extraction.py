@@ -6,9 +6,7 @@ Created on Sun Apr 28 11:00:25 2019
 """
 
 import cv2
-import numpy as np
 import os
-
 videos_folder = '../../download/separated_data/video'
 frames_folder = '../../download/separated_data/frame'
 #video_name = 'akwvpAiLFk0_144.680000-150.000000'
@@ -24,6 +22,7 @@ def frame_extraction(videos_folder, frames_folder, video_num):
     f = f[:video_num-1]
     
     for i in range(len(f)):
+        print("{0}/{1}".format(i, len(f)))
         video_file = f[i]
         video_name = video_file[:-4]
         frame_folder = frames_folder + '/' + video_name
@@ -36,22 +35,25 @@ def frame_extraction(videos_folder, frames_folder, video_num):
         video_path = videos_folder + '/' + video_file
         cap = cv2.VideoCapture(video_path)
         fps = cap.get(cv2.CAP_PROP_FPS)
-        print(fps)
         fps_target = 25
         currentFrame = 0
         targetFrame = 0
         count = 0
-        while(currentFrame<75):
+        while(count<75):
         # Capture frame-by-frame
             ret, frame = cap.read()
         
             #print ('Creating...' + name)
-            if (currentFrame == int(targetFrame)):
+            #print(currentFrame, targetFrame)
+            if (currentFrame == round(targetFrame)):
+                #print(currentFrame == int(targetFrame),currentFrame, targetFrame)
                 # Saves image of the current frame in jpg file
                 frame_path = frame_folder + '/' + str(count) + '.jpg'
                 cv2.imwrite(frame_path, frame)
                 targetFrame += fps/fps_target
+                
                 count += 1
+                
                 
         
             # To stop duplicate images
