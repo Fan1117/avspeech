@@ -57,8 +57,7 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
             sf.write(dir3, signal3, samplerate=SR)
             
             progress += 1
-            if progress%100 == 1:
-                print("Progress: {0}/{1}".format(i,len(f)))
+            print("Progress: {0}-{1}/{2}".format(i,path2_count,len(f)))
 #             ### feature extraction
 #             signal3_mel = librosa.feature.melspectrogram(y=signal3, sr=SR, n_mels=N_MEL)
 #             signal1_mel = librosa.feature.melspectrogram(y=signal1, sr=SR, n_mels=N_MEL)
