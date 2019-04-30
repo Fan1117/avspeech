@@ -67,6 +67,8 @@ def main(input_filename, output_filename, max_results,path):
         with open(input_filename[i], 'rb') as image:
             faces = detect_face(image, max_results)
             #print('Found {} face{}'.format(len(faces), '' if len(faces) == 1 else 's'))
+            if len(faces) < 1:
+                continue
             if len(faces) > 1:
                 continue
             #print('Writing to file {}'.format(output_filename[i]))
