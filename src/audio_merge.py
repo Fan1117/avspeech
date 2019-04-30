@@ -10,16 +10,16 @@ import soundfile as sf
 
 
 audio_path = '../../download/separated_data/audio'
-mix_path = '../../download/mixture_data/audio'
+mix_path = '../../new_download/mixture_data/audio'
 SR = 16000
-audio_num = 300
+audio_num = 50
 def audio_merge(audio_path, mix_path, audio_num):
     f = []
     for (dirpath, dirnames, filenames) in os.walk(audio_path):
         f.extend(filenames)
         break
     
-    f = f[:audio_num-1]
+    f = f[:audio_num]
     progress = 0
 
     for i in range(len(f)):
