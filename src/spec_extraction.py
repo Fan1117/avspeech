@@ -94,8 +94,8 @@ def invert_magnitude_phase(magnitude, phase_angle):
 #########################################################################
 SR = 16000
 separated_path = '../../download/separated_data/audio'
-mix_path = '../../download/mixture_data/audio'
-h5py_path = '../../dataset/no_video'
+mix_path = '../../new_download/mixture_data/audio'
+h5py_path = '../../new_dataset/no_video'
 
 
 def spec_extraction(mix_path, separated_path, h5py_path, sample_num):
@@ -146,7 +146,7 @@ def spec_extraction(mix_path, separated_path, h5py_path, sample_num):
         mel_1 = converter.signal_to_melspec(signal_1[:3*SR], transpose=True)
         mel_2 = converter.signal_to_melspec(signal_2[:3*SR], transpose=True)
         
-        if i < 2000:
+        if i < 200:
             if i == 0:
                 tr_dataset.create_dataset('spec_mix', shape=(2000, 301, 150), dtype=np.float32)
                 tr_dataset.create_dataset('spec_1', shape=(2000, 301, 150), dtype=np.float32)
@@ -155,8 +155,8 @@ def spec_extraction(mix_path, separated_path, h5py_path, sample_num):
             tr_dataset['spec_1'][i] = mel_1
             tr_dataset['spec_2'][i] = mel_2
             
-        elif i < 2500:
-            if i == 2000:
+        elif i < 250:
+            if i == 200:
                 val_dataset.create_dataset('spec_mix', shape=(500, 301, 150), dtype=np.float32)
                 val_dataset.create_dataset('spec_1', shape=(500, 301, 150), dtype=np.float32)
                 val_dataset.create_dataset('spec_2', shape=(500, 301, 150), dtype=np.float32)
@@ -164,8 +164,8 @@ def spec_extraction(mix_path, separated_path, h5py_path, sample_num):
             val_dataset['spec_1'][i-2000] = mel_1
             val_dataset['spec_2'][i-2000] = mel_2      
             
-        elif i < 3000:
-            if i == 2500:
+        elif i < 300:
+            if i == 250:
                 test_dataset.create_dataset('spec_mix', shape=(500, 301, 150), dtype=np.float32)
                 test_dataset.create_dataset('spec_1', shape=(500, 301, 150), dtype=np.float32)
                 test_dataset.create_dataset('spec_2', shape=(500, 301, 150), dtype=np.float32)
