@@ -94,8 +94,8 @@ def invert_magnitude_phase(magnitude, phase_angle):
 #########################################################################
 SR = 16000
 separated_path = '../../download/separated_data/audio'
-mix_path = '../../download/mixture_data/audio'
-h5py_path = '../../dataset/no_video'
+mix_path = '../../new_download/mixture_data/audio'
+h5py_path = '../../new_dataset/audio_video'
 face_embeddings_folder = '../../new_download/separated_data/nparray'
 
 def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path, sample_num):
