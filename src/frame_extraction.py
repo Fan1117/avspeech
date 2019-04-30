@@ -26,10 +26,7 @@ def frame_extraction(videos_folder, frames_folder, video_num):
         video_name = video_file[:-4]
         frame_folder = frames_folder + '/' + video_name
         
-        try:
-            os.makedirs(frame_folder)
-        except FileExistsError:
-            pass
+
         
         video_path = videos_folder + '/' + video_file
         cap = cv2.VideoCapture(video_path)
@@ -39,6 +36,10 @@ def frame_extraction(videos_folder, frames_folder, video_num):
             cap.release()
             cv2.destroyAllWindows()
             continue
+        try:
+            os.makedirs(frame_folder)
+        except FileExistsError:
+            pass
         fps_target = 25
         currentFrame = 0
         targetFrame = 0
