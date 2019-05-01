@@ -120,6 +120,9 @@ AV = load_model(model_path, custom_objects={'tf':tf})
 def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spec_1, output_spec_2):
     ### predict
     mask_pre_1, mask_pre_2 = AV.predict([input_spec_mix, input_face_1, input_face_2])
+    mask_sum = mask_pre_1 + mask_pre_2
+    mask_pre_1 = mask_pre_1/mask_sum
+    mask_pre_2 = mask_pre_2/mask_sum
     pre_spec_1 = input_spec_mix * mask_pre_1
     pre_spec_2 = input_spec_mix * mask_pre_2
     ###
