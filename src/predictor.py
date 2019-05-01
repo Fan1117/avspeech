@@ -4,6 +4,21 @@ Created on Wed May  1 09:55:41 2019
 
 @author: macfa
 """
+from keras.layers import *
+from keras import Model
+from keras.models import Sequential
+import tensorflow as tf
+import numpy as np
+import keras
+config = tf.ConfigProto( device_count = {'GPU': 1 , 'CPU': 8} ) 
+sess = tf.Session(config=config) 
+keras.backend.set_session(sess)
+import keras.layers as layers
+from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TensorBoard
+import h5py
+from load_dataset import data_generator
+import os
+####
 import numpy as np
 import librosa
 from config import PARAS
