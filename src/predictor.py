@@ -122,6 +122,9 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     mask_pre_1, mask_pre_2 = AV.predict([input_spec_mix, input_face_1, input_face_2])
     pre_spec_1 = input_spec_mix * mask_pre_1
     pre_spec_2 = input_spec_mix * mask_pre_2
+    ###
+    spec_mix = np.squeeze(input_spec_mix, axis=-1)
+    spec_mix = np.squeeze(spec_mix, axis=0)
     
     pre_spec_1 = np.squeeze(pre_spec_1, axis=-1)
     pre_spec_1 = np.squeeze(pre_spec_1, axis=0)
@@ -139,6 +142,7 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
         os.makedirs('../../np_res/')
     except FileExistsError:
         pass   
+    np.save('../../np_res/mix.npy', spec_mix)
     np.save('../../np_res/pre_1.npy', pre_spec_1)
     np.save('../../np_res/pre_2.npy', pre_spec_2)
     np.save('../../np_res/tar_1.npy', output_spec_1)
