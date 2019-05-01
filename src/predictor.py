@@ -137,11 +137,11 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     
     
     
-    sigal_pre_1 = converter.melspec_to_audio(pre_spec_1, log=True, phase=None, transpose=True, audio_out=False)
-    sigal_pre_2 = converter.melspec_to_audio(pre_spec_2, log=True, phase=None, transpose=True, audio_out=False)
+    sigal_pre_1 = converter.melspec_to_audio(pre_spec_1, transpose=True, audio_out=False)
+    sigal_pre_2 = converter.melspec_to_audio(pre_spec_2, transpose=True, audio_out=False)
     
-    sigal_target_1 = converter.melspec_to_audio(output_spec_1, log=True, phase=None, transpose=True, audio_out=False)
-    sigal_target_2 = converter.melspec_to_audio(output_spec_2, log=True, phase=None, transpose=True, audio_out=False)
+    sigal_target_1 = converter.melspec_to_audio(output_spec_1, transpose=True, audio_out=False)
+    sigal_target_2 = converter.melspec_to_audio(output_spec_2, transpose=True, audio_out=False)
     try:
         os.makedirs('../../res')
     except FileExistsError:
