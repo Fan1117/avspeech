@@ -11,6 +11,7 @@ import keras.layers as layers
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TensorBoard
 import h5py
 from load_dataset import data_generator
+import os
 
 train_dataset = '../../dataset/audio_video/tr_set.hdf5'
 val_dataset = '../../dataset/audio_video/val_set.hdf5'
@@ -192,12 +193,27 @@ history = AV.fit_generator(generator= train_generator, validation_data = val_gen
 #score = AV.evaluate([spec_mix,video_1,video_2], [spec_1,spec_2], verbose=1)
 #print('Test loss & accuracy:', score)
 # print('Test accuracy:', score[1])
-AV.save('AV.h5')
-import json
 
+model_dir = '../../model'
+
+####
+
+try:
+    os.makedirs(model_dir)
+except FileExistsError:
+    pass
+AV.save(model_dir + '/AV.h5')
+
+
+import json
+history_dir = '../../history'
+try:
+    os.makedirs(history_dir)
+except FileExistsError:
+    pass
 
 # save json
-with open('history.json', 'w') as fp:
+with open(history_dir + '/history.json', 'w') as fp:
     r = json.dump(history.history, fp, indent=2)
 
 # read json
