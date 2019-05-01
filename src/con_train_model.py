@@ -18,7 +18,7 @@ val_dataset = '../../new_dataset/audio_video/val_set.hdf5'
 test_dataset = '../../new_dataset/audio_video/test_set.hdf5'
 
 batch_size = 10
-epochs = 30
+epochs = 10
 
 train_generator = data_generator(train_dataset, batch_size)
 val_generator = data_generator(val_dataset, batch_size)
