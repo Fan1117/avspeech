@@ -151,6 +151,8 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     np.save('../../np_res/tar_1.npy', output_spec_1)
     np.save('../../np_res/tar_2.npy', output_spec_2)
     
+    sigal_mix = converter.melspec_to_audio(spec_mix, transpose=True, audio_out=False)
+    
     sigal_pre_1 = converter.melspec_to_audio(pre_spec_1, transpose=True, audio_out=False)
     sigal_pre_2 = converter.melspec_to_audio(pre_spec_2, transpose=True, audio_out=False)
     
@@ -160,6 +162,7 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
         os.makedirs('../../res')
     except FileExistsError:
         pass
+    sf.write('../../res/mix.wav', sigal_mix, samplerate=PARAS.SR)
     sf.write('../../res/pre_1.wav', sigal_pre_1, samplerate=PARAS.SR)
     sf.write('../../res/pre_2.wav', sigal_pre_2, samplerate=PARAS.SR)
     sf.write('../../res/tar_1.wav', sigal_target_1, samplerate=PARAS.SR)
