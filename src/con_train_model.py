@@ -167,21 +167,20 @@ val_generator = data_generator(val_dataset, batch_size)
 #print("spec1's shape", spec1.shape)
 #spec2 = Lambda(lambda x : tf.multiply(x[0], x[1]), name = "multiply2")([A1, mask2])
 #print("spec2's shape", spec2.shape)
-#AV = Model(inputs=[A1,V1,VV1],outputs=[spec1,spec2])
-#
-## es = EarlyStopping(monitor='loss', min_delta=0, patience= 30,
-##                    verbose=1, mode='min', baseline=None, restore_best_weights= True)
-#ES = EarlyStopping(monitor='loss',patience=5)
-## Reduce learning rate when a metric has stopped improving.
-## rp = ReduceLROnPlateau(monitor=['loss'], factor=0.01, patience=5, verbose=1, mode='auto',
-##                        min_delta=0.0001, cooldown=0, min_lr=0)
-#tb = TensorBoard(log_dir='./tb_logs', histogram_freq=0, batch_size= batch_size,
-#                 write_graph=True, write_grads=False, write_images=False,
-#                 embeddings_freq=0, embeddings_layer_names=None,
-#                 embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
-#AV.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
 model_path = '../../model/AV_30.h5'
 AV = keras.models.load_model(model_path, custom_objects={'tf':tf})
+# es = EarlyStopping(monitor='loss', min_delta=0, patience= 30,
+#                    verbose=1, mode='min', baseline=None, restore_best_weights= True)
+ES = EarlyStopping(monitor='loss',patience=5)
+# Reduce learning rate when a metric has stopped improving.
+# rp = ReduceLROnPlateau(monitor=['loss'], factor=0.01, patience=5, verbose=1, mode='auto',
+#                        min_delta=0.0001, cooldown=0, min_lr=0)
+tb = TensorBoard(log_dir='./tb_logs', histogram_freq=0, batch_size= batch_size,
+                 write_graph=True, write_grads=False, write_images=False,
+                 embeddings_freq=0, embeddings_layer_names=None,
+                 embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
+AV.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
+
 #history = AV.fit([spec_mix,video_1,video_2],[spec_1,spec_2],
 #         validation_split = 0.2,
 #         batch_size = batch_size,
