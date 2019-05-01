@@ -28,8 +28,8 @@ class MelConverter:
 
     def __init__(self, sample_rate=PARAS.SR,
                  n_fft=PARAS.N_FFT,
-                 hop_length=PARAS.N_FFT // 4,
-                 #hop_length=160,
+                 #hop_length=PARAS.N_FFT // 4,
+                 hop_length=160,
                  n_mel_freqs=PARAS.N_MEL,
                  freq_min_hz=0, freq_max_hz=None):
 
