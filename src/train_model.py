@@ -18,7 +18,7 @@ val_dataset = '../../new_dataset/audio_video/val_set.hdf5'
 test_dataset = '../../new_dataset/audio_video/test_set.hdf5'
 
 batch_size = 10
-epochs = 20
+epochs = 30
 
 train_generator = data_generator(train_dataset, batch_size)
 val_generator = data_generator(val_dataset, batch_size)
@@ -187,7 +187,7 @@ AV.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
 #         epochs = epochs,
 #         callbacks = [ES,tb])
 
-history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 50/batch_size, epochs = 5, steps_per_epoch = 200/batch_size, verbose = 1, shuffle = True,
+history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 50/batch_size, epochs = epochs, steps_per_epoch = 200/batch_size, verbose = 1, shuffle = True,
                   callbacks = [ES, tb])
 
 #score = AV.evaluate([spec_mix,video_1,video_2], [spec_1,spec_2], verbose=1)
@@ -202,7 +202,7 @@ try:
     os.makedirs(model_dir)
 except FileExistsError:
     pass
-AV.save(model_dir + '/AV.h5')
+AV.save(model_dir + '/AV_30.h5')
 
 
 import json
@@ -213,11 +213,11 @@ except FileExistsError:
     pass
 
 # save json
-with open(history_dir + '/history.json', 'w') as fp:
+with open(history_dir + '/history_30.json', 'w') as fp:
     r = json.dump(history.history, fp, indent=2)
 
 # read json
-with open('history.json', 'r') as fp:
+with open(history_dir + '/history_30.json', 'r') as fp:
     history = json.load(fp)
     print(history)
 
