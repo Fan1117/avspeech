@@ -10,6 +10,9 @@ from keras.models import Sequential
 import tensorflow as tf
 import numpy as np
 import keras
+config = tf.ConfigProto( device_count = {'GPU': 1 , 'CPU': 8} ) 
+sess = tf.Session(config=config) 
+keras.backend.set_session(sess)
 import keras.layers as layers
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TensorBoard
 import h5py
@@ -112,7 +115,7 @@ test_dataset = '../../new_dataset/audio_video/test_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
 [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
 converter = MelConverter()
-AV = load_model(model_path)
+AV = load_model(model_path, custom_objects={'tf':tf})
 #############################################################
 def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spec_1, output_spec_2):
     ### predict
