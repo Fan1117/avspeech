@@ -135,7 +135,14 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     output_spec_2 = np.squeeze(output_spec_2, axis=-1)
     output_spec_2 = np.squeeze(output_spec_2, axis=0)
     
-    
+    try:
+        os.makedirs('../../np_res/')
+    except FileExistsError:
+        pass   
+    np.save('../../np_res/pre_1.npy', pre_spec_1)
+    np.save('../../np_res/pre_2.npy', pre_spec_2)
+    np.save('../../np_res/tar_1.npy', output_spec_1)
+    np.save('../../np_res/tar_2.npy', output_spec_2)
     
     sigal_pre_1 = converter.melspec_to_audio(pre_spec_1, transpose=True, audio_out=False)
     sigal_pre_2 = converter.melspec_to_audio(pre_spec_2, transpose=True, audio_out=False)
