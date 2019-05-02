@@ -110,7 +110,7 @@ import soundfile as sf
 import os
 ##############################################################
 model_dir = '../../../pre_data/model'
-model_path = '../../../pre_data/model/AV_30.h5'
+model_path = '../../../model/AV_30.h5'
 test_dataset = '../../../pre_data/audio_video/tr_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
 for i in range(2):
