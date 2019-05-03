@@ -113,8 +113,7 @@ model_dir = '../../../pre_data/model'
 model_path = '../../../model/AV_30.h5'
 test_dataset = '../../../pre_data/audio_video/tr_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
-for i in range(2):
-    [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
+[input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
 converter = MelConverter()
 AV = load_model(model_path, custom_objects={'tf':tf})
 #############################################################
