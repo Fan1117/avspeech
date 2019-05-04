@@ -17,17 +17,17 @@ def process_and_save(dict_path, n):
             video_in_path = row[0]
             name = video_in_path.split('/')[-1]
             name = name[:-4]
-            video_out_path = '../../new_download/separated_data/' + '/video/' + name + '.mp4'
+            video_out_path = '../../100_download/separated_data/' + '/video/' + name + '.mp4'
             #video_out_path = '../../download/separated_data/' + '/video/' + row[2] + '-' + row[3] + '.mp4'
             #video_out_path = row[3] + '.mp4'
-            wav_out_path = '../../new_download/separated_data/' + '/audio/' + name + '.wav'
+            wav_out_path = '../../100_download/separated_data/' + '/audio/' + name + '.wav'
             #wav_out_path = '../../download/separated_data/' + '/audio/' + row[2]  + '-' + row[3] + '.wav'
             try:
-                os.makedirs('../../new_download/separated_data/' + 'video')
+                os.makedirs('../../100_download/separated_data/' + 'video')
             except FileExistsError:
                 pass
             try:
-                os.makedirs('../../new_download/separated_data/' + 'audio')
+                os.makedirs('../../100_download/separated_data/' + 'audio')
             except FileExistsError:
                 pass
             
