@@ -42,4 +42,4 @@ def process_and_save(dict_path, n):
             if count == n:
                 break
             
-process_and_save(csv_out_path, 30)
+process_and_save(csv_out_path, 100)
