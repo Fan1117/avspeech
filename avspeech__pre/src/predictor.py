@@ -159,7 +159,7 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     sigal_target_1 = converter.melspec_to_audio(output_spec_1, transpose=True, audio_out=False)
     sigal_target_2 = converter.melspec_to_audio(output_spec_2, transpose=True, audio_out=False)
     try:
-        os.makedirs('../../pre_data/tr_res')
+        os.makedirs('../../../pre_data/tr_res')
     except FileExistsError:
         pass
     sf.write('../../../pre_data/tr_res/mix_30_con2.wav', sigal_mix, samplerate=PARAS.SR)
