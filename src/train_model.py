@@ -13,9 +13,9 @@ import h5py
 from load_dataset import data_generator
 import os
 
-train_dataset = '../../new_dataset/audio_video/tr_set.hdf5'
-val_dataset = '../../new_dataset/audio_video/val_set.hdf5'
-test_dataset = '../../new_dataset/audio_video/test_set.hdf5'
+train_dataset = '../../100_dataset/audio_video/tr_set.hdf5'
+val_dataset = '../../100_dataset/audio_video/val_set.hdf5'
+test_dataset = '../../100_dataset/audio_video/test_set.hdf5'
 
 batch_size = 10
 epochs = 30
@@ -175,7 +175,7 @@ ES = EarlyStopping(monitor='loss',patience=5)
 # Reduce learning rate when a metric has stopped improving.
 # rp = ReduceLROnPlateau(monitor=['loss'], factor=0.01, patience=5, verbose=1, mode='auto',
 #                        min_delta=0.0001, cooldown=0, min_lr=0)
-tb = TensorBoard(log_dir='./tb_logs', histogram_freq=0, batch_size= batch_size,
+tb = TensorBoard(log_dir='./100_tb_logs', histogram_freq=0, batch_size= batch_size,
                  write_graph=True, write_grads=False, write_images=False,
                  embeddings_freq=0, embeddings_layer_names=None,
                  embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
@@ -194,7 +194,7 @@ history = AV.fit_generator(generator= train_generator, validation_data = val_gen
 #print('Test loss & accuracy:', score)
 # print('Test accuracy:', score[1])
 
-model_dir = '../../model'
+model_dir = '../../100_model'
 
 ####
 
@@ -202,22 +202,22 @@ try:
     os.makedirs(model_dir)
 except FileExistsError:
     pass
-AV.save(model_dir + '/AV_30.h5')
+AV.save(model_dir + '/AV_100.h5')
 
 
 import json
-history_dir = '../../history'
+history_dir = '../../100_history'
 try:
     os.makedirs(history_dir)
 except FileExistsError:
     pass
 
 # save json
-with open(history_dir + '/history_30.json', 'w') as fp:
+with open(history_dir + '/history_100.json', 'w') as fp:
     r = json.dump(history.history, fp, indent=2)
 
 # read json
-with open(history_dir + '/history_30.json', 'r') as fp:
+with open(history_dir + '/history_100.json', 'r') as fp:
     history = json.load(fp)
     print(history)
 
