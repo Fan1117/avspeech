@@ -16,7 +16,7 @@ def crop(image_path, coords, saved_location):
 #paths = ['019QoF6jwBU_150.633000-154.466000','6CUNIOtQ9L4_139.360000-144.440000',
 #         'sl08afxcx4_115.515400-119.986533','bLEddi92aFI_171.480000-177.400000']
     
-faces_folder = '../../../new_download/separated_data/faces'
+faces_folder = '../../../100_download/separated_data/faces'
 
 paths = []
 for (dirpath, dirnames, filenames) in os.walk(faces_folder):
@@ -26,7 +26,7 @@ count = 0
 for path in paths:
  print("{0}/{1}".format(count, len(paths)), path)
  count += 1
- filepath = '../../../new_download/separated_data/faces/'+path+'/box.txt'
+ filepath = '../../../100_download/separated_data/faces/'+path+'/box.txt'
  with open(filepath) as fp:  
    line = fp.readline()
    line = line.replace('[','')
@@ -58,9 +58,9 @@ for path in paths:
 
  
  for i in range(75):
-    image = '../../../new_download/separated_data/faces/'+path+'/out'+str(i)+'.jpg'
+    image = '../../../100_download/separated_data/faces/'+path+'/out'+str(i)+'.jpg'
     try:
-        os.makedirs('../../../new_download/separated_data/faces1/'+path)
+        os.makedirs('../../../100_download/separated_data/faces1/'+path)
     except FileExistsError:
         pass
     crop(image, (int(boxes[i][0]),int(boxes[i][1]), int(boxes[i][2]), int(boxes[i][5])), '../../../new_download/separated_data/faces1/'+path+'/cropped'+str(i)+'.jpg')
