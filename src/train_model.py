@@ -4,9 +4,9 @@ from keras.models import Sequential
 import tensorflow as tf
 import numpy as np
 import keras
-#config = tf.ConfigProto( device_count = {'GPU': 1 , 'CPU': 8} ) 
-#sess = tf.Session(config=config) 
-#keras.backend.set_session(sess)
+config = tf.ConfigProto( device_count = {'GPU': 1 , 'CPU': 8} ) 
+sess = tf.Session(config=config) 
+keras.backend.set_session(sess)
 import keras.layers as layers
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TensorBoard
 import h5py
@@ -17,7 +17,7 @@ train_dataset = '../../100_dataset/audio_video/tr_set.hdf5'
 val_dataset = '../../100_dataset/audio_video/val_set.hdf5'
 test_dataset = '../../100_dataset/audio_video/test_set.hdf5'
 
-batch_size = 20
+batch_size = 50
 epochs = 100
 
 train_generator = data_generator(train_dataset, batch_size)
