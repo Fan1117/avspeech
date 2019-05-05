@@ -9,11 +9,11 @@ import os
 import soundfile as sf
 
 
-audio_path = '../../new_download/separated_data/audio'
-mix_path = '../../new_download/mixture_data/audio'
-nparray_path = '../../new_download/separated_data/nparray'
+audio_path = '../../100_download/separated_data/audio'
+mix_path = '../../100_download/mixture_data/audio'
+nparray_path = '../../100_download/separated_data/nparray'
 SR = 16000
-audio_num = 50
+audio_num = 100
 def audio_merge(nparray_path, audio_path, mix_path, audio_num):
     f = []
     for (dirpath, dirnames, filenames) in os.walk(nparray_path):
