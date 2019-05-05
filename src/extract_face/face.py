@@ -73,14 +73,14 @@ def main(input_filename, output_filename, max_results,path):
                 continue
             
             try:
-                os.makedirs('../../../new_download/separated_data/faces/'+path)
+                os.makedirs('../../../100_download/separated_data/faces/'+path)
             except FileExistsError:
                 pass
             #print('Writing to file {}'.format(output_filename[i]))
             # Reset the file pointer, so we can read the file again
             image.seek(0)
             box = highlight_faces(image, faces, output_filename[i])
-        with open("../../../new_download/separated_data/faces/"+path+"/box.txt","a") as f:#append mode
+        with open("../../../100_download/separated_data/faces/"+path+"/box.txt","a") as f:#append mode
            f.write(str(box)+'\n') 
 # [END vision_face_detection_tutorial_run_application]
 
@@ -92,7 +92,7 @@ import os
 
 client = vision.ImageAnnotatorClient()
 
-frame_folder = '../../../new_download/separated_data/frame'
+frame_folder = '../../../100_download/separated_data/frame'
 
 paths = []
 for (dirpath, dirnames, filenames) in os.walk(frame_folder):
@@ -107,8 +107,8 @@ for path in paths:
     input_image = []
     output = []
     for i in range(75):
-       input_image.append('../../../new_download/separated_data/frame/'+path+'/'+str(i)+'.jpg')
-       output.append('../../../new_download/separated_data/faces/'+path+'/out'+str(i)+'.jpg')
+       input_image.append('../../../100_download/separated_data/frame/'+path+'/'+str(i)+'.jpg')
+       output.append('../../../100_download/separated_data/faces/'+path+'/out'+str(i)+'.jpg')
     max_results = 1
     main(input_image,output,max_results, path)
 
