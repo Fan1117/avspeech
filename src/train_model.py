@@ -4,9 +4,12 @@ from keras.models import Sequential
 import tensorflow as tf
 import numpy as np
 import keras
-config = tf.ConfigProto(device_count = {'GPU': 1}) 
-sess = tf.Session(config=config) 
-keras.backend.set_session(sess)
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+from keras import backend as K
+K.tensorflow_backend._get_available_gpus()
+#config = tf.ConfigProto(device_count = {'GPU': 1}) 
+#sess = tf.Session(config=config) 
+#keras.backend.set_session(sess)
 import keras.layers as layers
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TensorBoard
 import h5py
