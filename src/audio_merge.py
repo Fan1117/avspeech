@@ -10,6 +10,7 @@ import soundfile as sf
 
 
 audio_path = '../../100_download/separated_data/audio'
+normalize_audio_path = '../../100_download/norm_data/audio'
 mix_path = '../../100_download/mixture_data/audio'
 nparray_path = '../../100_download/separated_data/nparray'
 SR = 16000
@@ -48,6 +49,16 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
             ### merge
             signal3 = signal1_n2 + signal2_n2
             ### write mix_wav
+            try:
+                os.makedirs(normalize_audio_path)
+            except FileExistsError:
+                pass
+            dir1 = normalize_audio_path + '/' + name1 + '.wav'
+            sf.write(dir1, signal1_n2, samplerate=SR)
+            dir2 = normalize_audio_path + '/' + name2 + '.wav'
+            sf.write(dir2, signal2_n2, samplerate=SR)
+            
+            
             try:
                 os.makedirs(mix_path)
             except FileExistsError:
