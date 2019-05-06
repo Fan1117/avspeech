@@ -179,7 +179,11 @@ ES = EarlyStopping(monitor='loss',patience=5)
 # Reduce learning rate when a metric has stopped improving.
 # rp = ReduceLROnPlateau(monitor=['loss'], factor=0.01, patience=5, verbose=1, mode='auto',
 #                        min_delta=0.0001, cooldown=0, min_lr=0)
-tb = TensorBoard(log_dir='./100_tb_logs', histogram_freq=0, batch_size= batch_size,
+try:
+    os.makedirs('../../logs')
+except FileExistsError:
+    pass
+tb = TensorBoard(log_dir='../../logs/100_tb_logs', histogram_freq=0, batch_size= batch_size,
                  write_graph=True, write_grads=False, write_images=False,
                  embeddings_freq=0, embeddings_layer_names=None,
                  embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
