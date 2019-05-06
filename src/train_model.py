@@ -17,9 +17,9 @@ import h5py
 from load_dataset import data_generator
 import os
 
-train_dataset = '../../100_dataset/audio_video/tr_set.hdf5'
-val_dataset = '../../100_dataset/audio_video/val_set.hdf5'
-test_dataset = '../../100_dataset/audio_video/test_set.hdf5'
+train_dataset = '../../100_dataset/norm_audio_video/tr_set.hdf5'
+val_dataset = '../../100_dataset/norm_audio_video/val_set.hdf5'
+test_dataset = '../../100_dataset/norm_audio_video/test_set.hdf5'
 
 batch_size = 10
 epochs = 100
