@@ -11,7 +11,7 @@ videos_folder = '../../200_download/separated_data/video'
 frames_folder = '../../200_download/separated_data/frame'
 #video_name = 'akwvpAiLFk0_144.680000-150.000000'
 #video_name = 'AvWWVOgaMlk_090.000000-093.566667'
-video_num = 100
+video_num = 200
 
 def frame_extraction(videos_folder, frames_folder, video_num):
     f = []

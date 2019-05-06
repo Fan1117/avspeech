@@ -14,7 +14,7 @@ normalize_audio_path = '../../200_download/norm_data/audio'
 mix_path = '../../200_download/mixture_data/audio'
 nparray_path = '../../200_download/separated_data/nparray'
 SR = 16000
-audio_num = 100
+audio_num = 200
 def audio_merge(nparray_path, audio_path, mix_path, audio_num):
     f = []
     for (dirpath, dirnames, filenames) in os.walk(nparray_path):
