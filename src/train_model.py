@@ -17,9 +17,9 @@ import h5py
 from load_dataset import data_generator
 import os
 
-train_dataset = '../../100_dataset/norm_audio_video/tr_set.hdf5'
-val_dataset = '../../100_dataset/norm_audio_video/val_set.hdf5'
-test_dataset = '../../100_dataset/norm_audio_video/test_set.hdf5'
+train_dataset = '../../200_dataset/norm_audio_video/tr_set.hdf5'
+val_dataset = '../../200_dataset/norm_audio_video/val_set.hdf5'
+test_dataset = '../../200_dataset/norm_audio_video/test_set.hdf5'
 
 batch_size = 10
 epochs = 100
@@ -183,7 +183,7 @@ try:
     os.makedirs('../../logs')
 except FileExistsError:
     pass
-tb = TensorBoard(log_dir='../../logs/100_tb_logs', histogram_freq=0, batch_size= batch_size,
+tb = TensorBoard(log_dir='../../logs/200_tb_logs', histogram_freq=0, batch_size= batch_size,
                  write_graph=True, write_grads=False, write_images=False,
                  embeddings_freq=0, embeddings_layer_names=None,
                  embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
@@ -195,17 +195,17 @@ AV.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
 #         epochs = epochs,
 #         callbacks = [ES,tb])
 
-#history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, epochs = epochs, steps_per_epoch = 2000/batch_size, verbose = 1, shuffle = True,
-#                  callbacks = [ES, tb])
-
 history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, epochs = epochs, steps_per_epoch = 2000/batch_size, verbose = 1, shuffle = True,
-                  callbacks = [tb])### remove ES
+                  callbacks = [ES, tb])
+
+#history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, epochs = epochs, steps_per_epoch = 2000/batch_size, verbose = 1, shuffle = True,
+#                  callbacks = [tb])### remove ES
 
 #score = AV.evaluate([spec_mix,video_1,video_2], [spec_1,spec_2], verbose=1)
 #print('Test loss & accuracy:', score)
 # print('Test accuracy:', score[1])
 
-model_dir = '../../100_model'
+model_dir = '../../200_model'
 
 ####
 
@@ -217,7 +217,7 @@ AV.save(model_dir + '/AV_100.h5')
 
 
 import json
-history_dir = '../../100_history'
+history_dir = '../../200_history'
 try:
     os.makedirs(history_dir)
 except FileExistsError:
