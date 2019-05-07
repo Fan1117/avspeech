@@ -195,8 +195,11 @@ AV.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
 #         epochs = epochs,
 #         callbacks = [ES,tb])
 
+#history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, epochs = epochs, steps_per_epoch = 2000/batch_size, verbose = 1, shuffle = True,
+#                  callbacks = [ES, tb])
+
 history = AV.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, epochs = epochs, steps_per_epoch = 2000/batch_size, verbose = 1, shuffle = True,
-                  callbacks = [ES, tb])
+                  callbacks = [tb])### remove ES
 
 #score = AV.evaluate([spec_mix,video_1,video_2], [spec_1,spec_2], verbose=1)
 #print('Test loss & accuracy:', score)

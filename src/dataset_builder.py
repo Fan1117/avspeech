@@ -205,14 +205,14 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
             tr_dataset['video_1'][i] = video_1
             tr_dataset['video_2'][i] = video_2
             
-        elif i < 25000:
+        elif i < 21000:
             if i == 20000:
-                val_dataset.create_dataset('spec_mix', shape=(5000, 301, 150), dtype=np.float32)
-                val_dataset.create_dataset('spec_1', shape=(5000, 301, 150), dtype=np.float32)
-                val_dataset.create_dataset('spec_2', shape=(5000, 301, 150), dtype=np.float32)
+                val_dataset.create_dataset('spec_mix', shape=(1000, 301, 150), dtype=np.float32)
+                val_dataset.create_dataset('spec_1', shape=(1000, 301, 150), dtype=np.float32)
+                val_dataset.create_dataset('spec_2', shape=(1000, 301, 150), dtype=np.float32)
                 ### video
-                val_dataset.create_dataset('video_1', shape=(5000, 75, 512), dtype=np.float32)
-                val_dataset.create_dataset('video_2', shape=(5000, 75, 512), dtype=np.float32)
+                val_dataset.create_dataset('video_1', shape=(1000, 75, 512), dtype=np.float32)
+                val_dataset.create_dataset('video_2', shape=(1000, 75, 512), dtype=np.float32)
                 
                 
             val_dataset['spec_mix'][i-20000] = mel_mix
@@ -230,23 +230,23 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
 #            val_dataset['spec_1'][i-2000] = mel_1
 #            val_dataset['spec_2'][i-2000] = mel_2      
             
-        elif i < 30000:
+        elif i < 22000:
 
-            if i == 25000:
-                test_dataset.create_dataset('spec_mix', shape=(5000, 301, 150), dtype=np.float32)
-                test_dataset.create_dataset('spec_1', shape=(5000, 301, 150), dtype=np.float32)
-                test_dataset.create_dataset('spec_2', shape=(5000, 301, 150), dtype=np.float32)
+            if i == 21000:
+                test_dataset.create_dataset('spec_mix', shape=(1000, 301, 150), dtype=np.float32)
+                test_dataset.create_dataset('spec_1', shape=(1000, 301, 150), dtype=np.float32)
+                test_dataset.create_dataset('spec_2', shape=(1000, 301, 150), dtype=np.float32)
                 ### video
                 test_dataset.create_dataset('video_1', shape=(5000, 75, 512), dtype=np.float32)
                 test_dataset.create_dataset('video_2', shape=(5000, 75, 512), dtype=np.float32)
                 
                 
-            test_dataset['spec_mix'][i-25000] = mel_mix
-            test_dataset['spec_1'][i-25000] = mel_1
-            test_dataset['spec_2'][i-25000] = mel_2
+            test_dataset['spec_mix'][i-21000] = mel_mix
+            test_dataset['spec_1'][i-21000] = mel_1
+            test_dataset['spec_2'][i-21000] = mel_2
             ### video
-            test_dataset['video_1'][i-25000] = video_1
-            test_dataset['video_2'][i-25000] = video_2            
+            test_dataset['video_1'][i-21000] = video_1
+            test_dataset['video_2'][i-21000] = video_2            
 
             
 #            if i == 250:
@@ -266,7 +266,7 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
     test_dataset.close()
             
 
-spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path, 30000)
+spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path, 22000)
 #spec_extraction(mix_path, separated_path, h5py_path, 3000)         
             
             
