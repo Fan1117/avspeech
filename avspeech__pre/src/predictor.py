@@ -109,8 +109,8 @@ from load_dataset import data_generator
 import soundfile as sf
 import os
 ##############################################################
-model_dir = '../../../200_model'
-model_path = '../../../200_model/AV_100.h5'
+model_dir = '../../../200sw_model'
+model_path = '../../../200sw_model/AV_200sw.h5'
 test_dataset = '../../../pre_data/audio_video/tr_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
 [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
