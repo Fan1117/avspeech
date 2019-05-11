@@ -141,7 +141,11 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     output_spec_2 = np.squeeze(output_spec_2, axis=-1)
     output_spec_2 = np.squeeze(output_spec_2, axis=0)
     
+    mask_pre_1 = np.squeeze(mask_pre_1, axis=-1)
+    mask_pre_1 = np.squeeze(mask_pre_1, axis=0)
     
+    mask_pre_2 = np.squeeze(mask_pre_2, axis=-1)
+    mask_pre_2 = np.squeeze(mask_pre_2, axis=0)
     
     try:
         os.makedirs('../../../pre_data/tr_np_res/')
