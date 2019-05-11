@@ -17,9 +17,9 @@ import h5py
 from load_dataset import data_generator
 import os
 
-train_dataset = '../../100_dataset/norm_audio_video/tr_set.hdf5'
-val_dataset = '../../100_dataset/norm_audio_video/val_set.hdf5'
-test_dataset = '../../100_dataset/norm_audio_video/test_set.hdf5'
+train_dataset = '../../200_dataset/norm_audio_video/tr_set.hdf5'
+val_dataset = '../../200_dataset/norm_audio_video/val_set.hdf5'
+test_dataset = '../../200_dataset/norm_audio_video/test_set.hdf5'
 
 batch_size = 10
 epochs = 100
@@ -179,10 +179,10 @@ class FullModel():
 
         #generate mask
         mask = Reshape([2 , 301, 150])(AuVi6) ;print("mask ", mask.shape)
-        mask1 = Lambda(lambda x : abs(x[:,0,:,:])/np.max(abs(x[:,0,:,:])))(mask) ;print("mask 1 ", mask1.shape)
-        mask2 = Lambda(lambda x : abs(x[:,1,:,:])/np.max(abs(x[:,1,:,:])))(mask) ;print("mask 2 ", mask2.shape)
-        # mask1 = Lambda(lambda x : x[:,0])(mask) ;print("mask 1 ", mask1.shape)
-        # mask2 = Lambda(lambda x : x[:,1])(mask) ;print("mask 2 ", mask2.shape)
+#        mask1 = Lambda(lambda x : abs(x[:,0,:,:])/np.max(abs(x[:,0,:,:])))(mask) ;print("mask 1 ", mask1.shape)
+#        mask2 = Lambda(lambda x : abs(x[:,1,:,:])/np.max(abs(x[:,1,:,:])))(mask) ;print("mask 2 ", mask2.shape)
+        mask1 = Lambda(lambda x : x[:,0])(mask) ;print("mask 1 ", mask1.shape)
+        mask2 = Lambda(lambda x : x[:,1])(mask) ;print("mask 2 ", mask2.shape)
 
         #insert a dimension to multiply
         mask1 = Lambda(lambda x : tf.expand_dims(x, axis = -1))(mask1) ;print("mask 1 after insert dimiension", mask1.shape)
@@ -209,7 +209,7 @@ try:
     os.makedirs('../../logs')
 except FileExistsError:
     pass
-tb = TensorBoard(log_dir='../../logs/100sw_tb_logs', histogram_freq=0, batch_size= batch_size,
+tb = TensorBoard(log_dir='../../logs/200sw_tb_logs', histogram_freq=0, batch_size= batch_size,
                  write_graph=True, write_grads=False, write_images=False,
                  embeddings_freq=0, embeddings_layer_names=None,
                  embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
@@ -221,14 +221,14 @@ AuVi.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
 #         epochs = epochs,
 #         callbacks = [ES,tb])
 
-history = AuVi.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, epochs = epochs, steps_per_epoch = 2000/batch_size, verbose = 1, shuffle = True,
+history = AuVi.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 1000/batch_size, epochs = epochs, steps_per_epoch = 10000/batch_size, verbose = 1, shuffle = True,
                   callbacks = [ES, tb])
 
 #score = AuVi.evaluate([spec_mix,video_1,video_2], [spec_1,spec_2], verbose=1)
 #print('Test loss & accuracy:', score)
 # print('Test accuracy:', score[1])
 
-model_dir = '../../100sw_model'
+model_dir = '../../200sw_model'
 
 ####
 
@@ -236,23 +236,21 @@ try:
     os.makedirs(model_dir)
 except FileExistsError:
     pass
-AuVi.save(model_dir + '/AV_100sw.h5')
+AuVi.save(model_dir + '/AV_200sw.h5')
 
 
 import json
-history_dir = '../../100sw_history'
+history_dir = '../../200sw_history'
 try:
     os.makedirs(history_dir)
 except FileExistsError:
     pass
 
 # save json
-with open(history_dir + '/history_100sw.json', 'w') as fp:
+with open(history_dir + '/history_200sw.json', 'w') as fp:
     r = json.dump(history.history, fp, indent=2)
 
 # read json
-with open(history_dir + '/history_100sw.json', 'r') as fp:
+with open(history_dir + '/history_200sw.json', 'r') as fp:
     history = json.load(fp)
     print(history)
-
-
