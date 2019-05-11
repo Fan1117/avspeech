@@ -111,7 +111,7 @@ import os
 ##############################################################
 model_dir = '../../200_model'
 model_path = '../../200_model/AV_100.h5'
-test_dataset = '../../200_dataset/audio_video/tr_set.hdf5'
+test_dataset = '../../200_dataset/norm_audio_video/tr_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
 for i in range(2):
     [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
