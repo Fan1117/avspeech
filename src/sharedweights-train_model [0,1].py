@@ -4,6 +4,7 @@ from keras.models import Sequential
 import tensorflow as tf
 import numpy as np
 import keras
+from keras import backend as K
 #sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
 #config = tf.ConfigProto(device_count = {'GPU': 1}) 
