@@ -17,6 +17,19 @@ import h5py
 from load_dataset import data_generator
 import os
 
+##################
+def mean_iou(y_true, y_pred):
+    prec = []
+    for t in np.arange(0.5, 1.0, 0.05):
+        y_pred_ = tf.to_int32(y_pred > t)
+        score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, 2)
+        K.get_session().run(tf.local_variables_initializer())
+        with tf.control_dependencies([up_opt]):
+            score = tf.identity(score)
+        prec.append(score)
+    return K.mean(K.stack(prec), axis=0)
+##################
+
 train_dataset = '../../200_dataset/norm_audio_video/tr_set.hdf5'
 val_dataset = '../../200_dataset/norm_audio_video/val_set.hdf5'
 test_dataset = '../../200_dataset/norm_audio_video/test_set.hdf5'
@@ -193,7 +206,7 @@ class FullModel():
         print("spec1's shape", spec1.shape)
         spec2 = Lambda(lambda x : tf.multiply(x[0], x[1]), name = "multiply2")([A1, mask2])
         print("spec2's shape", spec2.shape)
-        model=Model(inputs=[A1,video1,video2],outputs=[spec1,spec2])
+        model=Model(inputs=[A1,video1,video2],outputs=[mask1, mask2])
         return model
 
  
@@ -213,7 +226,7 @@ tb = TensorBoard(log_dir='../../logs/200sw_tb_logs', histogram_freq=0, batch_siz
                  write_graph=True, write_grads=False, write_images=False,
                  embeddings_freq=0, embeddings_layer_names=None,
                  embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
-AuVi.compile(loss='mean_squared_error', optimizer='Adam',metrics=['accuracy'])
+AuVi.compile(loss='binary_crossentropy', optimizer='Adam',metrics=[mean_iou])
 
 #history = AuVi.fit([spec_mix,video_1,video_2],[spec_1,spec_2],
 #         validation_split = 0.2,
