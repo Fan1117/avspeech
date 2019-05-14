@@ -8,7 +8,7 @@ from ffmpy import FFmpeg
 import subprocess
 import os
 import csv
-csv_out_path = '../../../pre_data/data/test_dict.csv'
+csv_out_path = '../../../final_data/data/test_dict.csv'
 def process_and_save(dict_path, n):
     with open(dict_path, 'r') as f:
         reader = csv.reader(f)
@@ -17,17 +17,17 @@ def process_and_save(dict_path, n):
             video_in_path = row[0]
             name = video_in_path.split('/')[-1]
             name = name[:-4]
-            video_out_path = '../../../pre_data/separated_data/' + '/video/' + name + '.mp4'
+            video_out_path = '../../../final_data/separated_data/' + '/video/' + name + '.mp4'
             #video_out_path = '../../download/separated_data/' + '/video/' + row[2] + '-' + row[3] + '.mp4'
             #video_out_path = row[3] + '.mp4'
-            wav_out_path = '../../../pre_data/separated_data/' + '/audio/' + name + '.wav'
+            wav_out_path = '../../../final_data/separated_data/' + '/audio/' + name + '.wav'
             #wav_out_path = '../../download/separated_data/' + '/audio/' + row[2]  + '-' + row[3] + '.wav'
             try:
-                os.makedirs('../../../pre_data/separated_data/' + 'video')
+                os.makedirs('../../../final_data/separated_data/' + 'video')
             except FileExistsError:
                 pass
             try:
-                os.makedirs('../../../pre_data/separated_data/' + 'audio')
+                os.makedirs('../../../final_data/separated_data/' + 'audio')
             except FileExistsError:
                 pass
             

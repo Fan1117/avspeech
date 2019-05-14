@@ -9,11 +9,12 @@ import os
 import soundfile as sf
 
 
-audio_path = '../../../pre_data/separated_data/audio'
-mix_path = '../../../pre_data/mixture_data/audio'
-nparray_path = '../../../pre_data/separated_data/nparray'
+audio_path = '../../../final_data/separated_data/audio'
+normalize_audio_path = '../../../final_data/norm_data/audio'
+mix_path = '../../../final_data/mixture_data/audio'
+nparray_path = '../../../final_data/separated_data/nparray'
 SR = 16000
-audio_num = 50
+audio_num = 200
 def audio_merge(nparray_path, audio_path, mix_path, audio_num):
     f = []
     for (dirpath, dirnames, filenames) in os.walk(nparray_path):
@@ -48,6 +49,16 @@ def audio_merge(nparray_path, audio_path, mix_path, audio_num):
             ### merge
             signal3 = signal1_n2 + signal2_n2
             ### write mix_wav
+            try:
+                os.makedirs(normalize_audio_path)
+            except FileExistsError:
+                pass
+            dir1 = normalize_audio_path + '/' + name1 + '.wav'
+            sf.write(dir1, signal1_n2, samplerate=SR)
+            dir2 = normalize_audio_path + '/' + name2 + '.wav'
+            sf.write(dir2, signal2_n2, samplerate=SR)
+            
+            
             try:
                 os.makedirs(mix_path)
             except FileExistsError:
