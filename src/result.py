@@ -110,6 +110,17 @@ from load_dataset import data_generator
 import soundfile as sf
 import os
 ##############################################################
+def mean_iou(y_true, y_pred):
+    prec = []
+    for t in np.arange(0.5, 1.0, 0.05):
+        y_pred_ = tf.to_int32(y_pred > t)
+        score, up_opt = tf.metrics.mean_iou(y_true, y_pred_, 2)
+        K.get_session().run(tf.local_variables_initializer())
+        with tf.control_dependencies([up_opt]):
+            score = tf.identity(score)
+        prec.append(score)
+    return K.mean(K.stack(prec), axis=0)
+
 model_dir = '../../100sw_model'
 model_path = '../../100sw_model/AV_100sw.h5'
 test_dataset = '../../pre_data/audio_video/tr_set.hdf5'
@@ -117,7 +128,7 @@ test_generator = data_generator(test_dataset, 1)
 for i in range(2):
     [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
 converter = MelConverter()
-AV = load_model(model_path, custom_objects={'tf':tf})
+AV = load_model(model_path, custom_objects={'tf':tf, 'mean_iou': mean_iou})
 #############################################################
 import librosa
 
