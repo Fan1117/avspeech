@@ -190,12 +190,12 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
         
         if i < 10000:
             if i == 0:
-                tr_dataset.create_dataset('spec_mix', shape=(10000, 301, 150), dtype=np.float32)
-                tr_dataset.create_dataset('spec_1', shape=(10000, 301, 150), dtype=np.float32)
-                tr_dataset.create_dataset('spec_2', shape=(10000, 301, 150), dtype=np.float32)
+                tr_dataset.create_dataset('spec_mix', shape=(1, 301, 150), dtype=np.float32)
+                tr_dataset.create_dataset('spec_1', shape=(1, 301, 150), dtype=np.float32)
+                tr_dataset.create_dataset('spec_2', shape=(1, 301, 150), dtype=np.float32)
                 ### video
-                tr_dataset.create_dataset('video_1', shape=(10000, 75, 512), dtype=np.float32)
-                tr_dataset.create_dataset('video_2', shape=(10000, 75, 512), dtype=np.float32)
+                tr_dataset.create_dataset('video_1', shape=(1, 75, 512), dtype=np.float32)
+                tr_dataset.create_dataset('video_2', shape=(1, 75, 512), dtype=np.float32)
                 
                 
             tr_dataset['spec_mix'][i] = mel_mix
