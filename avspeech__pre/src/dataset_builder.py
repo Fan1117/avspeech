@@ -266,7 +266,7 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
     test_dataset.close()
             
 
-spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path, 11900)
+spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path, 1)
 #spec_extraction(mix_path, separated_path, h5py_path, 3000)         
             
             

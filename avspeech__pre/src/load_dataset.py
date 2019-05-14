@@ -8,6 +8,14 @@ import numpy as np
 import h5py
 tr_path = '../../dataset/no_video/test_set.hdf5'
 ###
+def create_gt_mask(vocal_spec, bg_spec):
+    """
+    Take in log spectrogram and return a mask map for TF bins
+    1 if the vocal sound is dominated in the TF-bin, while 0 for not
+    """
+#    vocal_spec = vocal_spec.numpy()
+#    bg_spec = bg_spec.numpy()
+    return np.array(vocal_spec > bg_spec, dtype=np.float32)
 def data_generator(dataset_path, batch_size):
     dataset = h5py.File(dataset_path, 'a')
     spec_mix = dataset['spec_mix']
@@ -18,6 +26,9 @@ def data_generator(dataset_path, batch_size):
     
     spec_2 = dataset['spec_2']
     spec_2 = np.array(spec_2)
+    
+    spec_1_mask = create_gt_mask(spec_1, spec_2)
+    spec_2_mask = create_gt_mask(spec_2, spec_1)
     
     video_1 = dataset['video_1']
     video_1 = np.array(video_1)
@@ -38,8 +49,8 @@ def data_generator(dataset_path, batch_size):
                 set_new = False
                 
             input_spec_mix[batch_index,:,:] = spec_mix[i,:,:]
-            output_spec_1[batch_index,:,:] = spec_1[i,:,:]
-            output_spec_2[batch_index,:,:] = spec_2[i,:,:]
+            output_spec_1[batch_index,:,:] = spec_1_mask[i,:,:]
+            output_spec_2[batch_index,:,:] = spec_2_mask[i,:,:]
             input_face_1[batch_index,:,:] = video_1[i,:,:]
             input_face_2[batch_index,:,:] = video_2[i,:,:]
             batch_index += 1
