@@ -188,7 +188,7 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
         mel_1 = converter.signal_to_melspec(signal_1[:3*SR], transpose=True)
         mel_2 = converter.signal_to_melspec(signal_2[:3*SR], transpose=True)
         
-        if i < 10000:
+        if i < 1:
             if i == 0:
                 tr_dataset.create_dataset('spec_mix', shape=(1, 301, 150), dtype=np.float32)
                 tr_dataset.create_dataset('spec_1', shape=(1, 301, 150), dtype=np.float32)
@@ -207,12 +207,12 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
             
         elif i < 11000:
             if i == 10000:
-                val_dataset.create_dataset('spec_mix', shape=(1000, 301, 150), dtype=np.float32)
-                val_dataset.create_dataset('spec_1', shape=(1000, 301, 150), dtype=np.float32)
-                val_dataset.create_dataset('spec_2', shape=(1000, 301, 150), dtype=np.float32)
+                val_dataset.create_dataset('spec_mix', shape=(1, 301, 150), dtype=np.float32)
+                val_dataset.create_dataset('spec_1', shape=(1, 301, 150), dtype=np.float32)
+                val_dataset.create_dataset('spec_2', shape=(1, 301, 150), dtype=np.float32)
                 ### video
-                val_dataset.create_dataset('video_1', shape=(1000, 75, 512), dtype=np.float32)
-                val_dataset.create_dataset('video_2', shape=(1000, 75, 512), dtype=np.float32)
+                val_dataset.create_dataset('video_1', shape=(1, 75, 512), dtype=np.float32)
+                val_dataset.create_dataset('video_2', shape=(1, 75, 512), dtype=np.float32)
                 
                 
             val_dataset['spec_mix'][i-10000] = mel_mix
@@ -233,12 +233,12 @@ def spec_extraction(mix_path, separated_path, face_embeddings_folder, h5py_path,
         elif i < 11900:
 
             if i == 11000:
-                test_dataset.create_dataset('spec_mix', shape=(900, 301, 150), dtype=np.float32)
-                test_dataset.create_dataset('spec_1', shape=(900, 301, 150), dtype=np.float32)
-                test_dataset.create_dataset('spec_2', shape=(900, 301, 150), dtype=np.float32)
+                test_dataset.create_dataset('spec_mix', shape=(1, 301, 150), dtype=np.float32)
+                test_dataset.create_dataset('spec_1', shape=(1, 301, 150), dtype=np.float32)
+                test_dataset.create_dataset('spec_2', shape=(1, 301, 150), dtype=np.float32)
                 ### video
-                test_dataset.create_dataset('video_1', shape=(900, 75, 512), dtype=np.float32)
-                test_dataset.create_dataset('video_2', shape=(900, 75, 512), dtype=np.float32)
+                test_dataset.create_dataset('video_1', shape=(1, 75, 512), dtype=np.float32)
+                test_dataset.create_dataset('video_2', shape=(1, 75, 512), dtype=np.float32)
                 
                 
             test_dataset['spec_mix'][i-11000] = mel_mix
