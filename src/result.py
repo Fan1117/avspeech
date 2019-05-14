@@ -119,23 +119,31 @@ for i in range(2):
 converter = MelConverter()
 AV = load_model(model_path, custom_objects={'tf':tf})
 #############################################################
+import librosa
+
 def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spec_1, output_spec_2):
     ### predict
     mask_pre_1, mask_pre_2 = AV.predict([input_spec_mix, input_face_1, input_face_2])
-    mask_sum = mask_pre_1 + mask_pre_2
-    mask_pre_1 = mask_pre_1/mask_sum
-    mask_pre_2 = mask_pre_2/mask_sum
-    pre_spec_1 = input_spec_mix * mask_pre_1
-    pre_spec_2 = input_spec_mix * mask_pre_2
+#    mask_sum = mask_pre_1 + mask_pre_2
+#    mask_pre_1 = mask_pre_1/mask_sum
+#    mask_pre_2 = mask_pre_2/mask_sum
+    mix_amplitude = librosa.db_to_power(input_spec_mix[0,:,:,0])
+    pre_spec_1 = mix_amplitude * mask_pre_1[0,:,:,0]
+    pre_spec_2 = mix_amplitude * mask_pre_2[0,:,:,0]
+    pre_spec_1 = librosa.power_to_db(pre_spec_1)
+    pre_spec_2 = librosa.power_to_db(pre_spec_2)
+    
+#    pre_spec_1 = input_spec_mix * mask_pre_1
+#    pre_spec_2 = input_spec_mix * mask_pre_2
     ###
     spec_mix = np.squeeze(input_spec_mix, axis=-1)
     spec_mix = np.squeeze(spec_mix, axis=0)
-    
-    pre_spec_1 = np.squeeze(pre_spec_1, axis=-1)
-    pre_spec_1 = np.squeeze(pre_spec_1, axis=0)
-    
-    pre_spec_2 = np.squeeze(pre_spec_2, axis=-1)
-    pre_spec_2 = np.squeeze(pre_spec_2, axis=0)
+#    
+#    pre_spec_1 = np.squeeze(pre_spec_1, axis=-1)
+#    pre_spec_1 = np.squeeze(pre_spec_1, axis=0)
+#    
+#    pre_spec_2 = np.squeeze(pre_spec_2, axis=-1)
+#    pre_spec_2 = np.squeeze(pre_spec_2, axis=0)
     ### target
     output_spec_1 = np.squeeze(output_spec_1, axis=-1)
     output_spec_1 = np.squeeze(output_spec_1, axis=0)
