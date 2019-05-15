@@ -123,7 +123,7 @@ def mean_iou(y_true, y_pred):
 
 model_dir = '../../100sw_model'
 model_path = '../../100sw_model/AV_100sw.h5'
-test_dataset = '../../lf/norm_audio_video/tr_set.hdf5'
+test_dataset = '../../pre_data/audio_video/tr_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
 for i in range(1):
     [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
@@ -171,6 +171,9 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     np.save('../../lf_np_res/100_pre_2.npy', pre_spec_2)
     np.save('../../lf_np_res/100_tar_1.npy', output_spec_1)
     np.save('../../lf_np_res/100_tar_2.npy', output_spec_2)
+    
+    np.save('../../lf_np_res/100_mask_1.npy', mask_pre_1[0,:,:,0])
+    np.save('../../lf_np_res/100_mask_2.npy', mask_pre_2[0,:,:,0])
     
     sigal_mix = converter.melspec_to_audio(spec_mix, transpose=True, audio_out=False)
     
