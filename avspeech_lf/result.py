@@ -123,7 +123,7 @@ def mean_iou(y_true, y_pred):
 
 model_dir = '../../100sw_model'
 model_path = '../../100sw_model/AV_100sw.h5'
-test_dataset = '../../100_dataset/norm_audio_video/test_set.hdf5'
+test_dataset = '../../lf/norm_audio_video/tr_set.hdf5'
 test_generator = data_generator(test_dataset, 1)
 for i in range(1):
     [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2] = next(test_generator)
@@ -163,14 +163,14 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     output_spec_2 = np.squeeze(output_spec_2, axis=0)
     
     try:
-        os.makedirs('../../pre_tr_np_res_mask/')
+        os.makedirs('../../lf_np_res/')
     except FileExistsError:
         pass   
-    np.save('../../pre_tr_np_res_mask/100_mix.npy', spec_mix)
-    np.save('../../pre_tr_np_res_mask/100_pre_1.npy', pre_spec_1)
-    np.save('../../pre_tr_np_res_mask/100_pre_2.npy', pre_spec_2)
-    np.save('../../pre_tr_np_res_mask/100_tar_1.npy', output_spec_1)
-    np.save('../../pre_tr_np_res_mask/100_tar_2.npy', output_spec_2)
+    np.save('../../lf_np_res/100_mix.npy', spec_mix)
+    np.save('../../lf_np_res/100_pre_1.npy', pre_spec_1)
+    np.save('../../lf_np_res/100_pre_2.npy', pre_spec_2)
+    np.save('../../lf_np_res/100_tar_1.npy', output_spec_1)
+    np.save('../../lf_np_res/100_tar_2.npy', output_spec_2)
     
     sigal_mix = converter.melspec_to_audio(spec_mix, transpose=True, audio_out=False)
     
@@ -180,13 +180,13 @@ def spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spe
     sigal_target_1 = converter.melspec_to_audio(output_spec_1, transpose=True, audio_out=False)
     sigal_target_2 = converter.melspec_to_audio(output_spec_2, transpose=True, audio_out=False)
     try:
-        os.makedirs('../../pre_tr_res_mask')
+        os.makedirs('../../lf_res')
     except FileExistsError:
         pass
-    sf.write('../../pre_tr_res_mask/100_mix.wav', sigal_mix, samplerate=PARAS.SR)
-    sf.write('../../pre_tr_res_mask/100_pre_1.wav', sigal_pre_1, samplerate=PARAS.SR)
-    sf.write('../../pre_tr_res_mask/100_pre_2.wav', sigal_pre_2, samplerate=PARAS.SR)
-    sf.write('../../pre_tr_res_mask/100_tar_1.wav', sigal_target_1, samplerate=PARAS.SR)
-    sf.write('../../pre_tr_res_mask/100_tar_2.wav', sigal_target_2, samplerate=PARAS.SR)
+    sf.write('../../lf_res/100_mix.wav', sigal_mix, samplerate=PARAS.SR)
+    sf.write('../../lf_res/100_pre_1.wav', sigal_pre_1, samplerate=PARAS.SR)
+    sf.write('../../lf_res/100_pre_2.wav', sigal_pre_2, samplerate=PARAS.SR)
+    sf.write('../../lf_res/100_tar_1.wav', sigal_target_1, samplerate=PARAS.SR)
+    sf.write('../../lf_res/100_tar_2.wav', sigal_target_2, samplerate=PARAS.SR)
     
 spectrogram_separator(input_spec_mix, input_face_1, input_face_2, output_spec_1, output_spec_2)
