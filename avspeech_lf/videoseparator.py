@@ -14,9 +14,9 @@ def process_and_save(dict_path, n):
         reader = csv.reader(f)
         count = 0
         for row in reader:
-            if count < 100:
-                count += 1
-                continue
+#            if count < 100:
+#                count += 1
+#                continue
             video_in_path = row[0]
             name = video_in_path.split('/')[-1]
             name = name[:-4]
