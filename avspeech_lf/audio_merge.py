@@ -9,10 +9,10 @@ import os
 import soundfile as sf
 
 
-audio_path = '../../200_download/separated_data/audio'
-normalize_audio_path = '../../200_download/norm_data/audio'
-mix_path = '../../200_download/mixture_data/audio'
-nparray_path = '../../200_download/separated_data/nparray'
+audio_path = '../../lf/separated_data/audio'
+normalize_audio_path = '../../lf/norm_data/audio'
+mix_path = '../../lf/mixture_data/audio'
+nparray_path = '../../lf/separated_data/nparray'
 SR = 16000
 audio_num = 200
 def audio_merge(nparray_path, audio_path, mix_path, audio_num):
