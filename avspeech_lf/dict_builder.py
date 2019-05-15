@@ -8,8 +8,8 @@ Created on Fri Apr 26 11:59:47 2019
 import csv
 import os
 import sys
-csv_out_path = '../../../lf/data/test_dict.csv'
-mp4_fold_path = '../../../lf/data/test'
+csv_out_path = '../../lf/data/test_dict.csv'
+mp4_fold_path = '../../lf/data/test'
 
 
 
