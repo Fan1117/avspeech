@@ -6,7 +6,9 @@ Created on Tue Apr 30 14:40:05 2019
 """
 import numpy as np
 import h5py
-tr_path = '../../dataset/no_video/test_set.hdf5'
+
+
+
 ###
 def create_gt_mask(vocal_spec, bg_spec):
     """
@@ -30,13 +32,6 @@ def data_generator(dataset_path, batch_size):
     spec_1_mask = create_gt_mask(spec_1, spec_2)
     spec_2_mask = create_gt_mask(spec_2, spec_1)
     
-    
-    #### image reize 301*150 -> 128*128
-    
-    
-
-
-    
     set_new = True
     while True:
         for i in range(spec_mix.shape[0]):
@@ -59,9 +54,3 @@ def data_generator(dataset_path, batch_size):
                 output_spec_1 = np.expand_dims(output_spec_1, axis = -1)
                 output_spec_2 = np.expand_dims(output_spec_2, axis = -1)
                 yield [input_spec_mix], [output_spec_1, output_spec_2]
-                    
-                        
-                
-
-            
-    

@@ -5,55 +5,25 @@ Created on Mon May 13 19:20:13 2019
 @author: macfa
 """
 
-tr_path = '../../Dataset/train.h5'
-val_path = '../../Dataset/valid.h5'
-test_path = '../../Dataset/test.h5'
+h5py_path = '../../Unetdata/dataset'
+tr_path = h5py_path + '/' + 'tr_set.hdf5'
+val_path = h5py_path + '/' + 'val_set.hdf5'
+test_path = h5py_path + '/' + 'test_set.hdf5'
 
-batch_size = 50
+
+batch_size = 10
 ################################DATA
 from keras.layers import Lambda
 import numpy as np
-import h5py
-import torch
-from torch.utils.data import Dataset, DataLoader
-from config import PARAS
+from load_dataset import data_generator
 
-from data_loader import torch_dataset_loader
-train_loader = torch_dataset_loader(tr_path, batch_size, True, PARAS.kwargs)
-validation_loader = torch_dataset_loader(val_path, batch_size, False, PARAS.kwargs)
-test_loader = torch_dataset_loader(test_path, batch_size, False, PARAS.kwargs)
+train_generator = data_generator(tr_path, batch_size)
+val_generator = data_generator(val_path, batch_size)
+test_generator = data_generator(test_path, batch_size)
 
-def data_generator(data_loader):
-  while True:
-    for index, data_item in enumerate(data_loader):
-        
-        ### img_resize
-        mix = np.array(data_item['mix'])
-        np.array(data_item['target'])
-        
-        ###
-        yield np.expand_dims(np.array(data_item['mix']),-1), np.expand_dims(np.array(data_item['target']),-1)
-        
-train_generator = data_generator(train_loader) 
-val_generator = data_generator(validation_loader) 
 ##############################DATA
 ##############################Model
 import os
-import sys
-import random
-import warnings
-
-import numpy as np
-import pandas as pd
-
-import matplotlib.pyplot as plt
-
-from tqdm import tqdm
-from itertools import chain
-from skimage.io import imread, imshow, imread_collection, concatenate_images
-from skimage.transform import resize
-from skimage.morphology import label
-
 from keras.models import Model, load_model
 from keras.layers import Input
 from keras.layers.core import Dropout, Lambda
@@ -62,10 +32,10 @@ from keras.layers.pooling import MaxPooling2D
 from keras.layers.merge import concatenate
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 from keras import backend as K
-
 import tensorflow as tf
 
-IMG_WIDTH = 128
+
+IMG_WIDTH = 256
 IMG_HEIGHT = 128
 IMG_CHANNELS = 1
 
@@ -145,26 +115,26 @@ model.summary()
 earlystopper = EarlyStopping(patience=5, verbose=1)
 # checkpointer = ModelCheckpoint('model-dsbowl2018-1.h5', verbose=1, save_best_only=True)
 try:
-    os.makedirs('../../logs')
+    os.makedirs('../../Unetdata/logs')
 except FileExistsError:
     pass
-tb = TensorBoard(log_dir='../../logs', histogram_freq=0, batch_size= batch_size,
+tb = TensorBoard(log_dir='../../Unetdata/logs', histogram_freq=0, batch_size= batch_size,
                  write_graph=True, write_grads=False, write_images=False,
                  embeddings_freq=0, embeddings_layer_names=None,
                  embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
 
-results = model.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 1420/batch_size, steps_per_epoch = 11400/batch_size, epochs=20, 
+results = model.fit_generator(generator= train_generator, validation_data = val_generator, validation_steps = 500/batch_size, steps_per_epoch = 2000/batch_size, epochs=50, 
                   callbacks = [earlystopper, tb])
 ###################################################
-model_dir = '../../model'
+model_dir = '../../Unetdata/model'
 try:
     os.makedirs(model_dir)
 except FileExistsError:
     pass
-model.save_weights('../../model/unet_mask.h5')
+model.save_weights('../../Unetdata/model/unet_mask.h5')
 ###################################################
 import json
-history_dir = '../../history'
+history_dir = '../../Unet/history'
 try:
     os.makedirs(history_dir)
 except FileExistsError:
