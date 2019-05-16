@@ -61,10 +61,11 @@ def data_generator(dataset_path, batch_size):
                 input_spec_mix = np.expand_dims(input_spec_mix, axis = -1)
                 output_spec_1 = np.expand_dims(output_spec_1, axis = -1)
                 output_spec_2 = np.expand_dims(output_spec_2, axis = -1)
-                yield [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2]
+                #yield [input_spec_mix, input_face_1, input_face_2], [output_spec_1, output_spec_2]
+                yield spec_1, spec_2
                     
-                        
-                
+tr = data_generator('../../data/tr_set.hdf5',1)
+
 
             
     
