@@ -83,6 +83,7 @@ for i in range(len(f)):
         if i == 2500:
             test_dataset.create_dataset('spec_mix', shape=(500, 256, 128), dtype=np.float32)
             test_dataset.create_dataset('spec_1', shape=(500, 256, 128), dtype=np.float32)
+            test_dataset.create_dataset('spec_2', shape=(500, 256, 128), dtype=np.float32)
 
         test_dataset['spec_mix'][i-2500] = mel_mix
         test_dataset['spec_1'][i-2500] = mel_1
