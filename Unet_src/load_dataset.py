@@ -53,4 +53,4 @@ def data_generator(dataset_path, batch_size):
                 input_spec_mix = np.expand_dims(input_spec_mix, axis = -1)
                 output_spec_1 = np.expand_dims(output_spec_1, axis = -1)
                 output_spec_2 = np.expand_dims(output_spec_2, axis = -1)
-                yield [input_spec_mix], [output_spec_1, output_spec_2]
+                yield [input_spec_mix], [output_spec_1]
