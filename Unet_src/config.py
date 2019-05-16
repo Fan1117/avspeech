@@ -1,5 +1,5 @@
 # define the model paras here
-import torch
+#import torch
 
 
 class PARAS:
@@ -21,14 +21,14 @@ class PARAS:
     BATCH_SIZE = 3
     EPOCH_NUM = 100
 
-    USE_CUDA = True
-    CUDA = torch.cuda.is_available() and USE_CUDA
-    if CUDA:
-        kwargs = {'num_workers': 1, 'pin_memory': True}
-    else:
-        kwargs = {}
-
-    LOG_STEP = None
+#    USE_CUDA = True
+#    CUDA = torch.cuda.is_available() and USE_CUDA
+#    if CUDA:
+#        kwargs = {'num_workers': 1, 'pin_memory': True}
+#    else:
+#        kwargs = {}
+#
+#    LOG_STEP = None
 
 
 
